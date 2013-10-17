@@ -1,5 +1,14 @@
+import datetime
+from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
+
+GENDER = (
+    ("Male", 'Male'),
+    ("Female", 'Female'),
+    ("Other", 'Other'),
+    ("None", 'None'),
+) 
 
 class Narrative(models.Model):
     user = models.ForeignKey(User)
@@ -7,6 +16,22 @@ class Narrative(models.Model):
     title = models.CharField(max_length=100)
     story = models.CharField(max_length=2500)
 
+    def __unicode__(self):
+        return self.title
+
 class Choices(models.Model):
     choice = models.CharField(max_length=2500)
     belongs_to = models.ForeignKey(Narrative)
+
+    def __unicode__(self):
+        return self.choice
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    gender = models.CharField(blank=True, max_length=20, choices=GENDER)
+    age = models.IntegerField(blank=True, null=True)
+    last_visit = models.DateTimeField(blank=True, null=True)
+    hair = models.CharField(blank=True, max_length=50)
+    
+    def __str__(self):
+        return self.user
