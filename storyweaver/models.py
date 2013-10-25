@@ -33,5 +33,5 @@ class UserProfile(models.Model):
     last_visit = models.DateTimeField(blank=True, null=True)
     hair = models.CharField(blank=True, max_length=50)
     
-    def __str__(self):
-        return self.user
+    def __unicode__(self):
+        return self.user.username

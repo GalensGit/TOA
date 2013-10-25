@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+    <link href="nivo-slider.css" rel="stylesheet" type="text/css" media="screen">
+{% load cms_tags %}
+{% block base_content %}
+<article>
+{% placeholder article_content %}
+{% block article_content %}{% endblock %}
+</article>
+<aside>
+{% placeholder aside_content %}
+{% block aside_content %}{% endblock %}
+</aside>
+{% endblock %}

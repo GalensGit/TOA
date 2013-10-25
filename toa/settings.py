@@ -41,7 +41,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(SITE_ROOT, 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -84,14 +84,28 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.request',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'cms.context_processors.media',
+    'sekizai.context_processors.sekizai',
+)
+
 MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.doc.XViewMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'cms.middleware.page.CurrentPageMiddleware',
+    'cms.middleware.user.CurrentUserMiddleware',
+    'cms.middleware.toolbar.ToolbarMiddleware',
+    'cms.middleware.language.LanguageCookieMiddleware',
 )
 
 ROOT_URLCONF = 'toa.urls'
@@ -113,6 +127,18 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cms',
+    'mptt',
+    'menus',
+    'sekizai',
+    'south',
+    'cms.plugins.link',
+    'cms.plugins.picture',
+    'cms.plugins.text',
+    'cms.plugins.snippet',
+    'filer',
+    'easy_thumbnails',
+    'cmsplugin_nivoslider',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'south',
@@ -120,6 +146,15 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+CMS_TEMPLATES = (
+    ('template_1.html', 'Two Panel'),
+    ('template_2.html', 'Three Panel'),
+)
+
+LANGUAGES = [
+    ('en', 'English'),
+]
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -150,9 +185,12 @@ LOGGING = {
     }
 }
 
-LOGIN_REDIRECT_URL = "/"
-
 REGISTRATION_TOKEN = ""
+
+LOGIN_URL = '/login'
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 
 DJANGO_ENVIRONMENT = os.environ.get('DJANGO_ENVIRONMENT', 'dev')
 exec('from settings_%s import *' % DJANGO_ENVIRONMENT)
