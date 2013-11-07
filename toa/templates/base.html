@@ -1,18 +1,25 @@
 <!DOCTYPE html>
+{% load cms_tags sekizai_tags %}
 <html>
   <head>
     <title>{% block title %}Welcome{% endblock %}</title>
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="/static/css/global.css"/>
+    {% render_block "css" %}
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
   </head>
   <body>
     <header>
       <nav>
+        <a href="/cms/">Blog</a>
+        <a href="/toa">Tails of Alternia</a>
+        <a href="/forums/forums">Forums</a>
       </nav>
     </header>
-      {% block content %}
-      {% endblock %}
+    {% cms_toolbar %}
+    {% placeholder base_content %}
+    {% block base_content %}{% endblock %}
+    {% render_block "js" %}
   </body>
 </html>
 <!--Joe (Goateed Yotie) & Chris (Fake Antler Cat)-->

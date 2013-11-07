@@ -1,6 +1,32 @@
 body {
+    font-family: "Times New Roman", Times, serif;
     background-color: #000;
 }
 #cent_img {
+    margin-left: 30%;
+}
+nav {
+    margin-top: 4%;
+}
+nav a {
+    background-color: #FFF;
+    color: #000;
+    margin: 1%;
+    margin-top: 1%;
+    padding: 1%;
+    border-radius: 10px;
+    text-decoration: none;
+}
+nav a:hover {
+    opacity: .5;
+}
+article {
+    background-color: #FFF;
+    border-radius: 15px;
+}
+article * {
+    margin-left: 1%;
+}
+#logo {
     margin-left: 30%;
 }

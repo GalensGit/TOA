@@ -8,7 +8,7 @@ GENDER = (
     ("Female", 'Female'),
     ("Other", 'Other'),
     ("None", 'None'),
-) 
+)
 
 class Narrative(models.Model):
     user = models.ForeignKey(User)
@@ -25,6 +25,20 @@ class Choices(models.Model):
 
     def __unicode__(self):
         return self.choice
+
+class Question(models.Model):
+    question = models.TextField()
+
+    def __unicode__(self):
+        return self.question
+
+class Answer(models.Model):
+    question = models.ForeignKey(Question)
+    answer = models.CharField(max_length=500)
+    attribute = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return self.answer
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)

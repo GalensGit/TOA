@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block base_content %}
+<article>
+{% for post in post_list %}
+<h3>{{ post.poster }}</h3>
+<p>{{ post.post }}</p>
+{% if post.image %}
+<img src="{{post.image.url}}"/>
+{% endif %}
+{% if post.document %}
+<a href="{{post.document.url}}">{{post.document}}</a>
+{% endif %}
+{% endfor %}
+{% if user.is_authenticated %}
+<a id="button" href="/forums/forums/create_post/">Add post</a>{% endif %}
+</article>
+{% endblock %}

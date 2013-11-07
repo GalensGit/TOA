@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block base_content %}
+<article>
+{% for thread in thread_list %}
+<h3><a href="/forums/thread/{{thread.id}}">{{ thread.title }}</a></h3>
+{% endfor %}
+</article>
+{% endblock %}

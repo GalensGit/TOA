@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^$', TemplateView.as_view(template_name='home.html')),
     # url(r'^toa/', include('toa.foo.urls')),
     url(r'^cms/', include('cms.urls')),
+    url(r'^forums/', include('forums.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

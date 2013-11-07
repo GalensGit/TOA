@@ -143,12 +143,13 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'south',
     'storyweaver',
+    'forums',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
 
 CMS_TEMPLATES = (
-    ('template_1.html', 'Two Panel'),
+    ('template_1.html', 'Updates'),
     ('template_2.html', 'Three Panel'),
 )
 
