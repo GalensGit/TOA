@@ -1,10 +1,23 @@
-from forums.models import Category, Thread, Post, Document
+from forums.models import Category, Thread, Post, Document, User
 from django.views import generic
 from django import forms
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
+from django.core.mail import send_mail
 # Create your views here.
+
+def mail_make(thread_obj):
+    user_list = []
+    posters = Post.objects.filter(thread=thread_obj.id)
+    for users in posters:
+        if users.poster.email not in user_list:
+            user_list.append(users.poster.email)
+        else:
+            pass
+    subject = "Update on the %s Forum" % (thread_obj)
+    msg = "Someone has posted to the form"
+    send_mail(subject, msg, 'forums@kappasofdulles.org', user_list)
 
 class CategoryList(generic.ListView):
     model = Category
@@ -20,6 +33,13 @@ class PostList(generic.ListView):
 
     def get_queryset(self):
         return Post.objects.filter(thread=self.kwargs['pk'])
+
+    def get_context_data(self, **kwargs):
+        context = super(PostList, self).get_context_data(**kwargs)
+        if len(context['post_list']) >= 1:
+            context['thread'] = context['post_list'][0].thread
+        context['threads'] = Thread.objects.all()
+        return context 
 
 class DocumentList(generic.ListView):
     model = Document
@@ -44,6 +64,8 @@ class PostCreation(generic.CreateView):
         object.poster = self.request.user
         object.thread = self.thread
         object.save()
+       # thread_obj = self.thread
+       # mail_make(thread_obj)
         return HttpResponseRedirect("/forums/thread/" + str(object.thread.id))
 
 class DocumentForm(forms.ModelForm):

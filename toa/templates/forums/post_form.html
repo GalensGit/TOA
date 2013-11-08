@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block base_content %}
+<div id="block">
 <form action="/forums/forums/create_post/" enctype="multipart/form-data" method="post">{% csrf_token %}
     {% for hidden in form.hidden_fields %}
     {{ hidden }}
@@ -16,5 +17,5 @@
     {% endfor %}
     <p><input type="submit" value="Add Post" /></p>
 </form>
-
+</div>
 {% endblock %}

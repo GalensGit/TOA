@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 {% block base_content %}
 <article>
+<h1>Threads</h1>
+{% if thread_list %}
 {% for thread in thread_list %}
 <h3><a href="/forums/thread/{{thread.id}}">{{ thread.title }}</a></h3>
+<p>Created By: {{thread.created_by}}</p>
 {% endfor %}
+{% else %}
+<p>Notify admin to add a thread</p>
+{% endif %}
 </article>
 {% endblock %}

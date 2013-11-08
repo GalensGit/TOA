@@ -1,21 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Documents</title>
+<link type="text/css" href="/static/css/tables.css" rel="stylesheet">
+</head>
+
+<body>
+
 {% extends "base.html" %}
 {% block base_content %}
 <article>
-<table>
+<h1>Reports and Documents</h1>
+<table width="800" id="doctable">
   <tr>
-    <th>Poster</th>
-    <th>File Name</th>
-    <th>Download</th>
+    <th width="223">Poster</th>
+    <th width="277">File Name</th>
+    <th width="287">Download</th>
   </tr>
+{% if document_list %}
 {% for document in document_list %}
   <tr>
     <td>{{document.poster}}</td>
     <td>{{document.file_name}}</td>
-    <td><a href="{{document.reports}}">Download</a></td>
+    <td><a href="{{document.reports.url}}">Download</a></td>
   </tr>
 {% endfor %}
+{% endif %}
 </table>
 {% if user.is_authenticated %}
 <a id="button" href="/forums/documents/add_document/">Add Document</a>{% endif %}
 </article>
 {% endblock %}
+
+</body>
+</html>

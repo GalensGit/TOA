@@ -1,8 +1,14 @@
 {% extends "base.html" %}
+{% load cms_tags %}
 {% block base_content %}
 <article>
+<h1>Forum Topics</h1>
+{% if category_list %}
 {% for category in category_list %}
 <h3><a href="/forums/forums/{{category.id}}">{{ category.title }}</a></h3>
 {% endfor %}
+{% else %}
+<p>Notify Admin to add category</p>
+{% endif %}
 </article>
 {% endblock %}

@@ -1,17 +1,31 @@
 {% extends "base.html" %}
 {% block base_content %}
 <article>
-{% for post in post_list %}
-<h3>{{ post.poster }}</h3>
-<p>{{ post.post }}</p>
-{% if post.image %}
-<img src="{{post.image.url}}"/>
-{% endif %}
-{% if post.document %}
-<a href="{{post.document.url}}">{{post.document}}</a>
-{% endif %}
-{% endfor %}
+<div id="block">
+<table class="tableformat">
+  {% if post_list %}
+  <th>{{thread}}</th>
+  {% for post in post_list %}
+  <tr><td><h3>{{ post.poster }}</h3>
+  <p>{{ post.post }}</p></td></tr>
+  {% if post.image %}
+  <tr><td><img src="{{post.image.url}}"/></td></tr>
+  {% endif %}
+  {% if post.document %}
+  <tr><td><a href="{{post.document.url}}">{{post.document}}</a></td></tr>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+</table>
 {% if user.is_authenticated %}
 <a id="button" href="/forums/forums/create_post/">Add post</a>{% endif %}
+</div>
 </article>
+<aside>
+<h2>Quick Threads</h2>
+{% for link in threads %}
+<a href="/forums/thread/{{link.id}}/">{{link.title}}</a>
+{% endfor %}
+<hr>
+</aside>
 {% endblock %}
