@@ -7,6 +7,7 @@ body {
 }
 nav {
     margin-top: 4%;
+    margin-bottom: 5%;
 }
 nav a {
     background-color: #FFF;
@@ -29,7 +30,4 @@ article * {
 }
 #logo {
     margin-left: 30%;
-}
-form {
-    margin-top: 5%;
 }
