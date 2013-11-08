@@ -4,3 +4,4 @@ django-filer
 cmsplugin_nivoslider
 south
 pillow
+psycopg2
